@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>shxdwtech</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", system-ui, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at top, #0a5cff, #020617 60%);
+      color: #eaf1ff;
+      overflow: hidden;
+    }
+
+    /* Fundo desfocado */
+    body::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, rgba(0,140,255,0.35), rgba(0,255,255,0.15));
+      filter: blur(80px);
+      z-index: -1;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 420px;
+      padding: 2.5rem 2rem;
+      background: rgba(10, 20, 40, 0.55);
+      backdrop-filter: blur(14px);
+      border-radius: 28px;
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow:
+        0 30px 60px rgba(0, 60, 180, 0.45),
+        inset 0 1px 0 rgba(255,255,255,0.15);
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      letter-spacing: 0.12em;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      background: linear-gradient(90deg, #6cf, #3af, #0ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .subtitle {
+      font-size: 0.95rem;
+      opacity: 0.85;
+      margin-bottom: 2rem;
+    }
+
+    .section-title {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      opacity: 0.7;
+      margin: 1.8rem 0 1rem;
+    }
+
+    .links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+    }
+
+    a.button {
+      text-decoration: none;
+      color: #eaf1ff;
+      padding: 0.85rem 1.2rem;
+      border-radius: 999px;
+      background: linear-gradient(145deg, #0b6bff, #003db8);
+      box-shadow:
+        0 8px 20px rgba(0, 120, 255, 0.45),
+        inset 0 1px 1px rgba(255,255,255,0.35),
+        inset 0 -2px 4px rgba(0,0,0,0.4);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      font-weight: 500;
+      position: relative;
+    }
+
+    a.button::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: linear-gradient(120deg, rgba(255,255,255,0.25), transparent 60%);
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+    a.button:hover {
+      transform: translateY(-2px);
+      box-shadow:
+        0 12px 28px rgba(0, 160, 255, 0.6),
+        inset 0 1px 1px rgba(255,255,255,0.4),
+        inset 0 -2px 4px rgba(0,0,0,0.45);
+    }
+
+    footer {
+      margin-top: 2.5rem;
+      font-size: 0.75rem;
+      opacity: 0.6;
+    }
+  /* Animações suaves */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .container {
+      animation: fadeUp 0.8s ease forwards;
+    }
+
+    /* Dark / Light mode */
+    :root {
+      --bg-main: radial-gradient(circle at top, #0a5cff, #020617 60%);
+      --card-bg: rgba(10, 20, 40, 0.55);
+      --text-main: #eaf1ff;
+    }
+
+    body.light {
+      --bg-main: radial-gradient(circle at top, #dbeafe, #eff6ff 60%);
+      --card-bg: rgba(255, 255, 255, 0.7);
+      --text-main: #020617;
+    }
+
+    body {
+      background: var(--bg-main);
+      color: var(--text-main);
+    }
+
+    .container {
+      background: var(--card-bg);
+    }
+
+    .toggle {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.25);
+      color: inherit;
+      padding: 0.45rem 0.9rem;
+      border-radius: 999px;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .toggle:hover {
+      transform: scale(1.05);
+      background: rgba(255,255,255,0.25);
+    }
+  </style>
+</head>
+<body>
+  <button class="toggle" onclick="document.body.classList.toggle('light')">🌙 / ☀️</button>
+  <div class="container">
+    <h1>shxdwtech</h1>
+    <p class="subtitle">Design digital • Tecnologia • Soluções online</p>
+
+    <div class="section-title">Redes Sociais</div>
+    <div class="links">
+      <a href="#" class="button" style="animation: fadeUp 0.6s ease both;">Instagram</a>
+      <a href="#" class="button" style="animation: fadeUp 0.6s ease both;">X / Twitter</a>
+      <a href="#" class="button" style="animation: fadeUp 0.6s ease both;">GitHub</a>
+    </div>
+
+    <div class="section-title">Projetos</div>
+    <div class="links">
+      <a href="#" class="button" style="animation: fadeUp 0.6s ease both;">Portfólio de Design</a>
+      <a href="#" class="button" style="animation: fadeUp 0.6s ease both;">Projetos Web</a>
+    </div>
+
+    <div class="section-title">Serviços</div>
+    <div class="links">
+      <a href="#" class="button" style="animation: fadeUp 0.6s ease both;">Design Gráfico</a>
+      <a href="#" class="button" style="animation: fadeUp 0.6s ease both;">Landing Pages</a>
+      <a href="#" class="button" style="animation: fadeUp 0.6s ease both;">Serviços Online</a>
+    </div>
+
+    <footer>
+      © 2025 shxdwtech
+    </footer>
+  </div>
+</body>
+</html>
