@@ -15,189 +15,170 @@
     }
 
     :root {
-      --bg-main: #04060c;
-      --bg-light: #e6efff;
-      --card-bg: rgba(14, 22, 45, 0.75);
-      --card-bg-light: rgba(255,255,255,0.8);
+      --bg-main: #03050b;
+      --card-bg: rgba(12, 20, 40, 0.75);
       --primary: #1e90ff;
       --secondary: #38bdf8;
       --text-main: #eaf1ff;
-      --text-muted: #8fa3d6;
-      --text-dark: #020617;
+      --text-muted: #93a4d9;
       --border: rgba(255,255,255,0.08);
     }
 
     body {
       min-height: 100vh;
-      background:
-        radial-gradient(circle at 15% 20%, rgba(30,144,255,0.18), transparent 40%),
-        radial-gradient(circle at 80% 10%, rgba(56,189,248,0.14), transparent 45%),
-        var(--bg-main);
+      background: radial-gradient(circle at 50% 50%, #081530, #02040a 70%);
       color: var(--text-main);
       overflow-x: hidden;
-      transition: background 0.4s ease, color 0.4s ease;
     }
 
-    body.light {
-      background:
-        radial-gradient(circle at 20% 20%, rgba(56,189,248,0.35), transparent 45%),
-        var(--bg-light);
-      color: var(--text-dark);
-    }
-
-    /* NOISE OVERLAY */
-    body::after {
+    /* STAR PARTICLES BACKGROUND */
+    body::before {
       content: "";
       position: fixed;
       inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events: none;
+      background-image:
+        radial-gradient(1px 1px at 20% 30%, #fff, transparent),
+        radial-gradient(1px 1px at 80% 40%, #9cf, transparent),
+        radial-gradient(1px 1px at 50% 80%, #fff, transparent),
+        radial-gradient(2px 2px at 70% 20%, #6cf, transparent),
+        radial-gradient(1px 1px at 30% 70%, #fff, transparent);
+      background-size: 200px 200px;
+      animation: stars 120s linear infinite;
+      opacity: 0.5;
       z-index: 0;
     }
 
-    /* TOGGLE */
-    .toggle {
-      position: fixed;
-      top: 24px;
-      right: 28px;
-      z-index: 10;
-      background: rgba(255,255,255,0.12);
-      border: 1px solid rgba(255,255,255,0.25);
-      color: inherit;
-      padding: 0.5rem 1rem;
-      border-radius: 999px;
-      cursor: pointer;
-      backdrop-filter: blur(12px);
-      transition: transform 0.2s ease, background 0.2s ease;
-    }
-
-    .toggle:hover {
-      transform: scale(1.05);
+    @keyframes stars {
+      from { transform: translateY(0); }
+      to { transform: translateY(-2000px); }
     }
 
     /* LAYOUT */
     .page {
       position: relative;
       z-index: 1;
-      min-height: 100vh;
-      display: grid;
-      grid-template-columns: 1.1fr 1fr;
-      padding: 4rem;
-      gap: 4rem;
-    }
-
-    /* HERO */
-    .hero {
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      gap: 5rem;
+      padding: 4rem;
+    }
+
+    /* HEADER / HERO */
+    header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      min-height: 90vh;
+    }
+
+    .branding {
       animation: fadeLeft 1s ease forwards;
     }
 
-    .hero h1 {
-      font-size: clamp(3rem, 4.5vw, 4.4rem);
+    .logo {
+      width: 120px;
+      height: 120px;
+      border-radius: 28px;
+      background: linear-gradient(145deg, #0a5cff, #012a78);
+      box-shadow:
+        0 30px 80px rgba(0,0,0,0.7),
+        0 0 40px rgba(30,144,255,0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      margin-bottom: 2rem;
+    }
+
+    .branding h1 {
+      font-size: clamp(3rem, 4vw, 4.5rem);
       letter-spacing: 0.22em;
       text-transform: uppercase;
-      margin-bottom: 1.4rem;
+      margin-bottom: 1.5rem;
       background: linear-gradient(90deg, var(--secondary), var(--primary));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
-    .hero p {
+    .branding p {
+      max-width: 520px;
       font-size: 1.15rem;
       line-height: 1.7;
       color: var(--text-muted);
-      max-width: 520px;
     }
 
-    body.light .hero p {
-      color: #334155;
-    }
-
-    /* CARDS */
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1.6rem;
-      align-content: center;
+    /* HERO VISUAL */
+    .hero-visual {
+      height: 420px;
+      border-radius: 36px;
+      background:
+        linear-gradient(180deg, rgba(30,144,255,0.25), transparent),
+        url("https://picsum.photos/800/600?blur=2") center/cover;
+      box-shadow: 0 40px 100px rgba(0,0,0,0.7);
       animation: fadeUp 1s ease forwards;
     }
 
+    /* SECTIONS */
+    section {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
     .card {
-      position: relative;
       background: var(--card-bg);
-      backdrop-filter: blur(20px);
+      backdrop-filter: blur(18px);
       border: 1px solid var(--border);
       border-radius: 28px;
-      padding: 1.8rem;
-      box-shadow:
-        0 30px 70px rgba(0,0,0,0.6),
-        inset 0 1px 0 rgba(255,255,255,0.06);
+      padding: 2rem;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.6);
       transition: transform 0.35s ease, box-shadow 0.35s ease;
-      overflow: hidden;
-    }
-
-    body.light .card {
-      background: var(--card-bg-light);
-      border: 1px solid rgba(0,0,0,0.08);
-    }
-
-    /* GLOW */
-    .card::before {
-      content: "";
-      position: absolute;
-      inset: -1px;
-      background: linear-gradient(120deg, transparent 30%, rgba(56,189,248,0.6), transparent 70%);
-      opacity: 0;
-      transition: opacity 0.4s ease;
-    }
-
-    .card:hover::before {
-      opacity: 1;
     }
 
     .card:hover {
-      transform: translateY(-8px) scale(1.02);
+      transform: translateY(-10px);
       box-shadow:
-        0 50px 100px rgba(0,0,0,0.75),
-        0 0 40px rgba(30,144,255,0.35);
+        0 50px 120px rgba(0,0,0,0.8),
+        0 0 40px rgba(30,144,255,0.4);
     }
 
     .card h3 {
-      font-size: 0.85rem;
       text-transform: uppercase;
-      letter-spacing: 0.22em;
+      letter-spacing: 0.2em;
+      font-size: 0.85rem;
       margin-bottom: 1.2rem;
       color: var(--secondary);
     }
 
-    .card a {
-      display: block;
-      text-decoration: none;
-      color: inherit;
-      padding: 0.75rem 0;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-      transition: transform 0.2s ease, color 0.2s ease;
+    /* GALLERY */
+    .gallery {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
     }
 
-    body.light .card a {
-      border-bottom: 1px solid rgba(0,0,0,0.08);
+    .gallery img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 22px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+      transition: transform 0.35s ease;
     }
 
-    .card a:hover {
-      color: var(--secondary);
-      transform: translateX(6px);
+    .gallery img:hover {
+      transform: scale(1.05);
     }
 
     /* FOOTER */
     footer {
-      position: fixed;
-      bottom: 22px;
-      left: 50%;
-      transform: translateX(-50%);
+      text-align: center;
       font-size: 0.75rem;
-      opacity: 0.55;
+      opacity: 0.6;
+      margin-bottom: 2rem;
     }
 
     /* ANIMAÇÕES */
@@ -213,54 +194,50 @@
 
     /* RESPONSIVO */
     @media (max-width: 900px) {
-      .page {
-        grid-template-columns: 1fr;
-        padding: 2.5rem 1.5rem;
-      }
-
-      footer {
-        position: static;
-        transform: none;
-        margin: 2rem 0 1rem;
-        text-align: center;
-      }
+      .page { padding: 2rem 1.4rem; }
+      header { grid-template-columns: 1fr; min-height: auto; }
+      .hero-visual { height: 280px; }
     }
   </style>
 </head>
 <body>
 
-  <button class="toggle" onclick="document.body.classList.toggle('light')">🌙 / ☀️</button>
-
   <main class="page">
 
-    <section class="hero">
-      <h1>shxdwtech</h1>
-      <p>
-        Estúdio digital focado em design moderno, experiências web futuristas
-        e soluções online com identidade forte e performance.
-      </p>
-    </section>
+    <header>
+      <div class="branding">
+        <div class="logo">LOGO</div>
+        <h1>shxdwtech</h1>
+        <p>
+          Estúdio criativo focado em design digital, experiências visuais futuristas
+          e soluções web com identidade forte.
+        </p>
+      </div>
 
-    <section class="cards">
+      <div class="hero-visual"></div>
+    </header>
+
+    <section>
       <div class="card">
-        <h3>Redes</h3>
-        <a href="#">Instagram</a>
-        <a href="#">X / Twitter</a>
-        <a href="#">GitHub</a>
+        <h3>O que fazemos</h3>
+        <p>Design UI/UX, landing pages modernas, identidade visual e experiências web premium.</p>
       </div>
 
       <div class="card">
-        <h3>Projetos</h3>
-        <a href="#">Design UI/UX</a>
-        <a href="#">Websites</a>
-        <a href="#">Experimentos Visuais</a>
+        <h3>Abordagem</h3>
+        <p>Minimalismo, performance, estética futurista e foco total na experiência do utilizador.</p>
       </div>
 
       <div class="card">
-        <h3>Serviços</h3>
-        <a href="#">Landing Pages</a>
-        <a href="#">Identidade Visual</a>
-        <a href="#">Soluções Online</a>
+        <h3>Contacto</h3>
+        <p>Trabalhos freelance, colaborações e projetos digitais sob medida.</p>
+      </div>
+
+      <div class="gallery">
+        <img src="https://picsum.photos/500/400?random=1" />
+        <img src="https://picsum.photos/500/400?random=2" />
+        <img src="https://picsum.photos/500/400?random=3" />
+        <img src="https://picsum.photos/500/400?random=4" />
       </div>
     </section>
 
