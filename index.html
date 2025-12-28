@@ -4,197 +4,269 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>shxdwtech</title>
+
   <style>
+    /* RESET */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: "Segoe UI", system-ui, sans-serif;
+      font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+    }
+
+    :root {
+      --bg-main: #04060c;
+      --bg-light: #e6efff;
+      --card-bg: rgba(14, 22, 45, 0.75);
+      --card-bg-light: rgba(255,255,255,0.8);
+      --primary: #1e90ff;
+      --secondary: #38bdf8;
+      --text-main: #eaf1ff;
+      --text-muted: #8fa3d6;
+      --text-dark: #020617;
+      --border: rgba(255,255,255,0.08);
     }
 
     body {
       min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: radial-gradient(circle at top, #0a5cff, #020617 60%);
-      color: #eaf1ff;
-      overflow: hidden;
-    }
-
-    /* Fundo desfocado */
-    body::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(120deg, rgba(0,140,255,0.35), rgba(0,255,255,0.15));
-      filter: blur(80px);
-      z-index: -1;
-    }
-
-    .container {
-      width: 100%;
-      max-width: 420px;
-      padding: 2.5rem 2rem;
-      background: rgba(10, 20, 40, 0.55);
-      backdrop-filter: blur(14px);
-      border-radius: 28px;
-      border: 1px solid rgba(255,255,255,0.12);
-      box-shadow:
-        0 30px 60px rgba(0, 60, 180, 0.45),
-        inset 0 1px 0 rgba(255,255,255,0.15);
-      text-align: center;
-    }
-
-    h1 {
-      font-size: 2.2rem;
-      letter-spacing: 0.12em;
-      margin-bottom: 0.5rem;
-      text-transform: uppercase;
-      background: linear-gradient(90deg, #6cf, #3af, #0ff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .subtitle {
-      font-size: 0.95rem;
-      opacity: 0.85;
-      margin-bottom: 2rem;
-    }
-
-    .section-title {
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-      opacity: 0.7;
-      margin: 1.8rem 0 1rem;
-    }
-
-    .links {
-      display: flex;
-      flex-direction: column;
-      gap: 0.9rem;
-    }
-
-    a.button {
-      text-decoration: none;
-      color: #eaf1ff;
-      padding: 0.85rem 1.2rem;
-      border-radius: 999px;
-      background: linear-gradient(145deg, #0b6bff, #003db8);
-      box-shadow:
-        0 8px 20px rgba(0, 120, 255, 0.45),
-        inset 0 1px 1px rgba(255,255,255,0.35),
-        inset 0 -2px 4px rgba(0,0,0,0.4);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-      font-weight: 500;
-      position: relative;
-    }
-
-    a.button::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      background: linear-gradient(120deg, rgba(255,255,255,0.25), transparent 60%);
-      opacity: 0.4;
-      pointer-events: none;
-    }
-
-    a.button:hover {
-      transform: translateY(-2px);
-      box-shadow:
-        0 12px 28px rgba(0, 160, 255, 0.6),
-        inset 0 1px 1px rgba(255,255,255,0.4),
-        inset 0 -2px 4px rgba(0,0,0,0.45);
-    }
-
-    footer {
-      margin-top: 2.5rem;
-      font-size: 0.75rem;
-      opacity: 0.6;
-    }
-  /* Animações suaves */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .container {
-      animation: fadeUp 0.8s ease forwards;
-    }
-
-    /* Dark / Light mode */
-    :root {
-      --bg-main: radial-gradient(circle at top, #0a5cff, #020617 60%);
-      --card-bg: rgba(10, 20, 40, 0.55);
-      --text-main: #eaf1ff;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(30,144,255,0.18), transparent 40%),
+        radial-gradient(circle at 80% 10%, rgba(56,189,248,0.14), transparent 45%),
+        var(--bg-main);
+      color: var(--text-main);
+      overflow-x: hidden;
+      transition: background 0.4s ease, color 0.4s ease;
     }
 
     body.light {
-      --bg-main: radial-gradient(circle at top, #dbeafe, #eff6ff 60%);
-      --card-bg: rgba(255, 255, 255, 0.7);
-      --text-main: #020617;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(56,189,248,0.35), transparent 45%),
+        var(--bg-light);
+      color: var(--text-dark);
     }
 
-    body {
-      background: var(--bg-main);
-      color: var(--text-main);
+    /* NOISE OVERLAY */
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
     }
 
-    .container {
-      background: var(--card-bg);
-    }
-
+    /* TOGGLE */
     .toggle {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      background: rgba(255,255,255,0.15);
+      position: fixed;
+      top: 24px;
+      right: 28px;
+      z-index: 10;
+      background: rgba(255,255,255,0.12);
       border: 1px solid rgba(255,255,255,0.25);
       color: inherit;
-      padding: 0.45rem 0.9rem;
+      padding: 0.5rem 1rem;
       border-radius: 999px;
       cursor: pointer;
-      backdrop-filter: blur(10px);
-      transition: background 0.2s ease, transform 0.2s ease;
+      backdrop-filter: blur(12px);
+      transition: transform 0.2s ease, background 0.2s ease;
     }
 
     .toggle:hover {
       transform: scale(1.05);
-      background: rgba(255,255,255,0.25);
+    }
+
+    /* LAYOUT */
+    .page {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      padding: 4rem;
+      gap: 4rem;
+    }
+
+    /* HERO */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      animation: fadeLeft 1s ease forwards;
+    }
+
+    .hero h1 {
+      font-size: clamp(3rem, 4.5vw, 4.4rem);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      margin-bottom: 1.4rem;
+      background: linear-gradient(90deg, var(--secondary), var(--primary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      font-size: 1.15rem;
+      line-height: 1.7;
+      color: var(--text-muted);
+      max-width: 520px;
+    }
+
+    body.light .hero p {
+      color: #334155;
+    }
+
+    /* CARDS */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.6rem;
+      align-content: center;
+      animation: fadeUp 1s ease forwards;
+    }
+
+    .card {
+      position: relative;
+      background: var(--card-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: 1.8rem;
+      box-shadow:
+        0 30px 70px rgba(0,0,0,0.6),
+        inset 0 1px 0 rgba(255,255,255,0.06);
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+      overflow: hidden;
+    }
+
+    body.light .card {
+      background: var(--card-bg-light);
+      border: 1px solid rgba(0,0,0,0.08);
+    }
+
+    /* GLOW */
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      background: linear-gradient(120deg, transparent 30%, rgba(56,189,248,0.6), transparent 70%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow:
+        0 50px 100px rgba(0,0,0,0.75),
+        0 0 40px rgba(30,144,255,0.35);
+    }
+
+    .card h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      margin-bottom: 1.2rem;
+      color: var(--secondary);
+    }
+
+    .card a {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      transition: transform 0.2s ease, color 0.2s ease;
+    }
+
+    body.light .card a {
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+    }
+
+    .card a:hover {
+      color: var(--secondary);
+      transform: translateX(6px);
+    }
+
+    /* FOOTER */
+    footer {
+      position: fixed;
+      bottom: 22px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.75rem;
+      opacity: 0.55;
+    }
+
+    /* ANIMAÇÕES */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeLeft {
+      from { opacity: 0; transform: translateX(-60px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    /* RESPONSIVO */
+    @media (max-width: 900px) {
+      .page {
+        grid-template-columns: 1fr;
+        padding: 2.5rem 1.5rem;
+      }
+
+      footer {
+        position: static;
+        transform: none;
+        margin: 2rem 0 1rem;
+        text-align: center;
+      }
     }
   </style>
 </head>
 <body>
+
   <button class="toggle" onclick="document.body.classList.toggle('light')">🌙 / ☀️</button>
-  <div class="container">
-    <h1>shxdwtech</h1>
-    <p class="subtitle">Design digital • Tecnologia • Soluções online</p>
 
-    <div class="section-title">Redes Sociais</div>
-    <div class="links">
-      <a href="#" class="button" style="animation: fadeUp 0.6s ease both;">Instagram</a>
-      <a href="#" class="button" style="animation: fadeUp 0.6s ease both;">X / Twitter</a>
-      <a href="#" class="button" style="animation: fadeUp 0.6s ease both;">GitHub</a>
-    </div>
+  <main class="page">
 
-    <div class="section-title">Projetos</div>
-    <div class="links">
-      <a href="#" class="button" style="animation: fadeUp 0.6s ease both;">Portfólio de Design</a>
-      <a href="#" class="button" style="animation: fadeUp 0.6s ease both;">Projetos Web</a>
-    </div>
+    <section class="hero">
+      <h1>shxdwtech</h1>
+      <p>
+        Estúdio digital focado em design moderno, experiências web futuristas
+        e soluções online com identidade forte e performance.
+      </p>
+    </section>
 
-    <div class="section-title">Serviços</div>
-    <div class="links">
-      <a href="#" class="button" style="animation: fadeUp 0.6s ease both;">Design Gráfico</a>
-      <a href="#" class="button" style="animation: fadeUp 0.6s ease both;">Landing Pages</a>
-      <a href="#" class="button" style="animation: fadeUp 0.6s ease both;">Serviços Online</a>
-    </div>
+    <section class="cards">
+      <div class="card">
+        <h3>Redes</h3>
+        <a href="#">Instagram</a>
+        <a href="#">X / Twitter</a>
+        <a href="#">GitHub</a>
+      </div>
 
-    <footer>
-      © 2025 shxdwtech
-    </footer>
-  </div>
+      <div class="card">
+        <h3>Projetos</h3>
+        <a href="#">Design UI/UX</a>
+        <a href="#">Websites</a>
+        <a href="#">Experimentos Visuais</a>
+      </div>
+
+      <div class="card">
+        <h3>Serviços</h3>
+        <a href="#">Landing Pages</a>
+        <a href="#">Identidade Visual</a>
+        <a href="#">Soluções Online</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>© 2025 shxdwtech</footer>
+
 </body>
 </html>
